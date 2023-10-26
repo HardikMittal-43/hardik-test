@@ -1,3 +1,5 @@
 steps:
       - name: gcr.io/searce-msp-gcp/firebase
         args: ['deploy', '--project=searce-msp-gcp', '--only=hosting']
+
+# checking for trigger only
