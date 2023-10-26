@@ -12,20 +12,20 @@
           #fi
 
 
+
 steps:
-- name: 'gcr.io/searce-msp-gcp/firebase'
+- name: 'gcr.io/cloud-builders/git'
   entrypoint: 'bash'
   args:
   - '-c'
   - |
-    if [[ "$COMMIT_MESSAGE" == *"group1"* ]]; then
-      echo "Specific commit message found. Triggering Firebase function deployment."
-      # Deploy Firebase function
+    if git log -1 --pretty=%B | grep -q "group1"; then
       firebase deploy --only functions
       # Deploy Firebase hosting
       firebase deploy --only hosting
+      exit 0
     else
-      echo "Skipping build for commit message: $COMMIT_MESSAGE"
+      exit 1
     fi
 
 
