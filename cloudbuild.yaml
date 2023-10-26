@@ -1,18 +1,13 @@
-#steps:
-#      - name: gcr.io/searce-msp-gcp/firebase
-#        args: ['deploy', '--project=searce-msp-gcp', '--only=hosting']
-
-# checking for trigger onl
-
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bash'
-  args:
-  - '-c'
-  - |
-    if [[ "$COMMIT_MESSAGE" == *"group1"* ]]; then
-      echo "Triggering build for specific commit message."
-      # Your build steps here
-    else
-      echo "Skipping build for commit message: $COMMIT_MESSAGE"
-    fi
+      - name: gcr.io/searce-msp-gcp/firebase
+        args: ['deploy', '--project=searce-msp-gcp', '--only=hosting']
+        args:
+        - '-c'
+        - |
+          if [[ "$COMMIT_MESSAGE" == *"group1"* ]]; then
+            echo "Triggering build for specific commit message."
+            ['deploy', '--project=searce-msp-gcp', '--only=hosting']
+          else
+            echo "Skipping build for commit message: $COMMIT_MESSAGE"
+          fi
+
