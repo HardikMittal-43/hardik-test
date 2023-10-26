@@ -1,13 +1,31 @@
+#steps:
+ #     - name: gcr.io/searce-msp-gcp/firebase
+  #      args:
+   #     - '-c'
+    #    - |
+     #     if [[ "$COMMIT_MESSAGE" == *"group1"* ]]; then
+      #      echo "Triggering build for specific commit message."
+       #     firebase deploy --only functions
+        #    firebase deploy --only hosting
+         # else
+          #  echo "Skipping build for commit message: $COMMIT_MESSAGE"
+          #fi
+
+
 steps:
-      - name: gcr.io/searce-msp-gcp/firebase
-        args:
-        - '-c'
-        - |
-          if [[ "$COMMIT_MESSAGE" == *"group1"* ]]; then
-            echo "Triggering build for specific commit message."
-            firebase deploy --only functions
-            firebase deploy --only hosting
-          else
-            echo "Skipping build for commit message: $COMMIT_MESSAGE"
-          fi
+- name: 'gcr.io/searce-msp-gcp/firebase'
+  entrypoint: 'bash'
+  args:
+  - '-c'
+  - |
+    if [[ "$COMMIT_MESSAGE" == *"group1"* ]]; then
+      echo "Specific commit message found. Triggering Firebase function deployment."
+      # Deploy Firebase function
+      firebase deploy --only functions
+      # Deploy Firebase hosting
+      firebase deploy --only hosting
+    else
+      echo "Skipping build for commit message: $COMMIT_MESSAGE"
+    fi
+
 
