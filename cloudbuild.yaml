@@ -1,12 +1,12 @@
 steps:
       - name: gcr.io/searce-msp-gcp/firebase
-        args: ['deploy', '--project=searce-msp-gcp', '--only=hosting']
         args:
         - '-c'
         - |
           if [[ "$COMMIT_MESSAGE" == *"group1"* ]]; then
             echo "Triggering build for specific commit message."
-            ['deploy', '--project=searce-msp-gcp', '--only=hosting']
+            firebase deploy --only functions
+            firebase deploy --only hosting
           else
             echo "Skipping build for commit message: $COMMIT_MESSAGE"
           fi
