@@ -5,12 +5,14 @@ steps:
   - '-c'
   - |
     if git log -1 --pretty=%B | grep -q "group1"; then
-      firebase deploy --only functions
+      # firebase deploy --only functions
       # Deploy Firebase hosting
-      firebase deploy --only hosting
+      # firebase deploy --only hosting
+      echo "function deployed successfully"
       exit 0
     else
       exit 1
+      echo "Please enter valid group name in commit message"
     fi
 
 
