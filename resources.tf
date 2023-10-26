@@ -1,11 +1,11 @@
 // Required variables from each project
-variable project_name { default = "ts-npe-network" }
+variable project_name { default = "searce-msp-gcp" }
 variable virtual_machine_name { default = "dev-openvpn" }
 
 
 // Configure the Google Cloud provider
 provider "google" {
-    project     = "ts-npe-network"
+    project     = "searce-msp-gcp"
     region      = "asia-southeast1"
     zone        = "asia-southeast1-a"
 }
